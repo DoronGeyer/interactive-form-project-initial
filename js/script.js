@@ -274,7 +274,7 @@ registerButton.addEventListener("click", (e) => {
   emailInputTest();
   nameInputTest();
   checkboxChecked();
-  crediCardFlag();
+  creditCardCheck();
   if(nameFlag==false || emailFlag==false || checkboxFlag==false){
     return false; 
   }else{
