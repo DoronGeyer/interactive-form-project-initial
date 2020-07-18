@@ -30,12 +30,13 @@ const checkboxHeading = document.querySelector(".activities legend");
  let checkboxFlag= false;
  let creditChosenFlag=false;
  let crediCardFlag = false;
- let cvvflag= false;
+ let zipCodeFlag = false;
+ let cvvFlag= false;
 
 
 //functions for testing input
 function nameInputTest() {
-  let regex = /^[\w]+(\s+)?[\w+]+$/i;
+  let regex = /^[a-zA-Z]+(\s+)?[a-zA-Z]+$/i;
   let regTest = regex.test(userName.value);
   let nameLabel = document.querySelector('label[for ="name"]');
   if (regTest) {
@@ -89,7 +90,69 @@ function checkboxChecked() {
     checkboxFlag= false;
   }
 }
+// checking credit card input is 9-13 digits long.
+function creditCardCheck(){
+  let regex = /^\d{13,16}$/;
+  let regTest= regex.test(creditCardNumber.value);
+  if(regTest){
+    creditCardNumber.style.backgroundColor = "palegreen";
+    crediCardFlag = true;
+  }else{
+    creditCardNumber.style.backgroundColor = " #fed8b1";
+    crediCardFlag = false;
+  }
+}
+function zipCodeCheck(){
+  let regex = /^\d{5}$/;
+  let regTest= regex.test(zipCode.value);
+  if(regTest){
+    zipCode.style.backgroundColor = "palegreen";
+    zipCodeFlag = true;
+  }else{
+    zipCode.style.backgroundColor = " #fed8b1";
+    zipCodeFlag = false;
+  }
+}
+function cvvCheck(){
+  let regex = /^\d{3}$/;
+  let regTest= regex.test(creditCardCvv.value);
+  if(regTest){
+    creditCardCvv.style.backgroundColor = "palegreen";
+    cvvFlag = true;
+  }else{
+    creditCardCvv.style.backgroundColor = " #fed8b1";
+    cvvFlag = false;
+  }
+}
+function validatorCheck(regexVal, fieldName, flagName){
+  let regex = regexVal;
+  let regTest= regex.test(fieldName.value);
+    if(regTest){
+      fieldName.style.backgroundColor= "palegreen";
+      flagName = true;
+    }else{
+      flagName = false;
+    }
+};
+
 //credit card validation
+
+creditCardNumber.addEventListener("input", e => {
+  creditCardCheck();
+  let ccLabel = document.querySelector("label[for='cc-num']")
+    if(creditCardNumber.value.length<13){
+      ccLabel.style.color= "darkred";
+      ccLabel.innerHTML = "Card Number: <strong>Not enough digits</strong>";
+    }else if(creditCardNumber.value.length>16){
+      ccLabel.style.color= "darkred";
+      ccLabel.innerHTML = "Card Number: <strong> Too many </strong></em>";
+    }else{
+      ccLabel.innerHTML = "Card Number:";
+      ccLabel.style.color= "black";
+    }
+
+})
+
 //function to manipulate select menu option properties.
 function optionManipulation(selectedOption, property, propValue) {
   let option = document.querySelector(`option[value="${selectedOption}"]`);
@@ -211,9 +274,11 @@ registerButton.addEventListener("click", (e) => {
   emailInputTest();
   nameInputTest();
   checkboxChecked();
+  crediCardFlag();
   if(nameFlag==false || emailFlag==false || checkboxFlag==false){
     return false; 
   }else{
     document.querySelectorAll("form")[0].submit();
   }
 });
+
