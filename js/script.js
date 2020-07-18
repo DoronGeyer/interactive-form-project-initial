@@ -15,7 +15,7 @@ const creditCardInfo = document.querySelector("#credit-card");
 const paypalInfo = document.querySelector("#paypal");
 paypalInfo.style.display = "none";
 const bitcoinInfo = document.querySelector("#bitcoin");
-bitcoinInfo.style.display = "none";
+
 
 //validation elements variable declarations
 const userName = document.querySelector("#name");
@@ -82,12 +82,10 @@ function checkboxChecked() {
   if (checked == true) {
     checkboxHeading.style.color= "rgba(6, 49, 68, 0.9)";
     checkboxHeading.innerHTML = "Register for Activities";
-    console.log("we have at least one thing checked");
    checkboxFlag= true;
   } else {
     checkboxHeading.style.color = "darkred";
     checkboxHeading.innerHTML = "Register for Activities : <strong> Please select at least 1 activity</strong>"
-    console.log("we have failed to check something");
     checkboxFlag= false;
   }
 }
@@ -207,15 +205,15 @@ userEmail.addEventListener("keyup", () => {
   emailInputTest();
 });
 
-registerButton.addEventListener("mouseover", () => {
+registerButton.addEventListener("click", (e) => {
+  e.preventDefault();
   console.log(emailFlag,nameFlag,checkboxFlag);
   emailInputTest();
   nameInputTest();
   checkboxChecked();
   if(nameFlag==false || emailFlag==false || checkboxFlag==false){
-    registerButton.disabled=true;
+    return false; 
   }else{
-    console.log("this shit is firing");
-    registerButton.removeAttribute("disabled");
+    document.querySelectorAll("form")[0].submit();
   }
 });
