@@ -1,3 +1,10 @@
+
+/**************************************************
+
+AIMING FOR EXCEEDS GRADE ON THE PROJECT
+
+*************************************************/
+
 const otherJobField = document.querySelector("#other-title");
 otherJobField.style.display = "none";
 const jobSelect = document.querySelector("#title");
