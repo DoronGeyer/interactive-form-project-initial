@@ -21,3 +21,5 @@ The Goals for the project were to show and hide form fields depending on options
 the Form inputs are also validated live as a user inputs info. 
 At least one of the form fields (credit card number) gives conditional errors.
 The form should still work with Javascript disabled.
+
+tested on multiple browsers, edge chrome firefox on 19 July 2020.
