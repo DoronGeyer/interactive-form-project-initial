@@ -16,7 +16,6 @@ const paypalInfo = document.querySelector("#paypal");
 paypalInfo.style.display = "none";
 const bitcoinInfo = document.querySelector("#bitcoin");
 
-
 //validation elements variable declarations
 const userName = document.querySelector("#name");
 const userEmail = document.querySelector("#mail");
@@ -25,14 +24,13 @@ const zipCode = document.querySelector("#zip");
 const creditCardCvv = document.querySelector("#cvv");
 const checkboxHeading = document.querySelector(".activities legend");
 //Flags for input submission checks
- let nameFlag = false;
- let emailFlag = false;
- let checkboxFlag= false;
- let creditChosenFlag=false;
- let crediCardFlag = false;
- let zipCodeFlag = false;
- let cvvFlag= false;
-
+let nameFlag = false;
+let emailFlag = false;
+let checkboxFlag = false;
+let creditChosenFlag = false;
+let creditCardFlag = false;
+let zipCodeFlag = false;
+let cvvFlag = false;
 
 //functions for testing input
 function nameInputTest() {
@@ -40,15 +38,17 @@ function nameInputTest() {
   let regTest = regex.test(userName.value);
   let nameLabel = document.querySelector('label[for ="name"]');
   if (regTest) {
+    userName.style.backgroundColor = "palegreen";
     userName.style.borderColor = "rgb(111, 157, 220)";
-    nameLabel.innerHTML = "Name :";
+    nameLabel.innerHTML = "Name: ";
     nameLabel.style.color = "black";
-    nameFlag= true;
+    nameFlag = true;
   } else {
+    userName.style.backgroundColor = " #fed8b1";
     userName.style.borderColor = "tomato";
     nameLabel.style.color = "darkred";
     nameLabel.innerHTML = "<strong>Name : Please enter a valid Name</strong>";
-    nameFlag= false;
+    nameFlag = false;
   }
 }
 function emailInputTest() {
@@ -57,102 +57,95 @@ function emailInputTest() {
   let regTest = regex.test(userEmail.value);
   let emailLabel = document.querySelector('label[for ="mail"]');
   if (regTest) {
+    userEmail.style.backgroundColor = "palegreen";
     userEmail.style.borderColor = "rgb(111, 157, 220)";
-    emailLabel.innerHTML = "Email :";
+    emailLabel.innerHTML = "Email: ";
     emailLabel.style.color = "black";
-    emailFlag= true;
+    emailFlag = true;
   } else {
+    userEmail.style.backgroundColor = " #fed8b1";
     userEmail.style.borderColor = "tomato";
     emailLabel.style.color = "darkred";
     emailLabel.innerHTML =
       "<strong>Email : Please enter a valid Email address example: <em>someone@domain.com/net</em></strong>";
-    emailFlag=false; 
+    emailFlag = false;
   }
 }
 function checkboxChecked() {
   let checked = false;
   for (let i = 0; i < activityCheckboxes.length; i++) {
-        const element = activityCheckboxes[i];
-        if (element.checked) {
-          checked = true;
-          break;
-        } else {
-          checked = false;
-        }
-      }
+    const element = activityCheckboxes[i];
+    if (element.checked) {
+      checked = true;
+      break;
+    } else {
+      checked = false;
+    }
+  }
   if (checked == true) {
-    checkboxHeading.style.color= "rgba(6, 49, 68, 0.9)";
+    checkboxHeading.style.color = "rgba(6, 49, 68, 0.9)";
     checkboxHeading.innerHTML = "Register for Activities";
-   checkboxFlag= true;
+    checkboxFlag = true;
   } else {
     checkboxHeading.style.color = "darkred";
-    checkboxHeading.innerHTML = "Register for Activities : <strong> Please select at least 1 activity</strong>"
-    checkboxFlag= false;
+    checkboxHeading.innerHTML =
+      "Register for Activities : <strong> Please select at least 1 activity</strong>";
+    checkboxFlag = false;
   }
 }
 // checking credit card input is 9-13 digits long.
-function creditCardCheck(){
-  let regex = /^\d{13,16}$/;
-  let regTest= regex.test(creditCardNumber.value);
-  if(regTest){
+function creditCardCheck() {
+  let regex = /^[0-9]{13,16}$/;
+  let regTest = regex.test(creditCardNumber.value);
+  if (regTest) {
     creditCardNumber.style.backgroundColor = "palegreen";
-    crediCardFlag = true;
-  }else{
+    creditCardFlag = true;
+  } else {
     creditCardNumber.style.backgroundColor = " #fed8b1";
-    crediCardFlag = false;
+    creditCardFlag = false;
   }
 }
-function zipCodeCheck(){
-  let regex = /^\d{5}$/;
-  let regTest= regex.test(zipCode.value);
-  if(regTest){
+function zipCodeCheck() {
+  let regex = /^[0-9]{5}$/;
+  let regTest = regex.test(zipCode.value);
+  if (regTest) {
     zipCode.style.backgroundColor = "palegreen";
     zipCodeFlag = true;
-  }else{
+  } else {
     zipCode.style.backgroundColor = " #fed8b1";
     zipCodeFlag = false;
   }
 }
-function cvvCheck(){
-  let regex = /^\d{3}$/;
-  let regTest= regex.test(creditCardCvv.value);
-  if(regTest){
+function cvvCheck() {
+  let regex = /^[0-9]{3}$/;
+  let regTest = regex.test(creditCardCvv.value);
+  if (regTest) {
     creditCardCvv.style.backgroundColor = "palegreen";
     cvvFlag = true;
-  }else{
+  } else {
     creditCardCvv.style.backgroundColor = " #fed8b1";
     cvvFlag = false;
   }
 }
-function validatorCheck(regexVal, fieldName, flagName){
-  let regex = regexVal;
-  let regTest= regex.test(fieldName.value);
-    if(regTest){
-      fieldName.style.backgroundColor= "palegreen";
-      flagName = true;
-    }else{
-      flagName = false;
-    }
-};
 
 //credit card validation
 
-creditCardNumber.addEventListener("input", e => {
+creditCardNumber.addEventListener("input", (e) => {
   creditCardCheck();
-  let ccLabel = document.querySelector("label[for='cc-num']")
-    if(creditCardNumber.value.length<13){
-      ccLabel.style.color= "darkred";
-      ccLabel.innerHTML = "Card Number: <strong>Not enough digits</strong>";
-    }else if(creditCardNumber.value.length>16){
-      ccLabel.style.color= "darkred";
-      ccLabel.innerHTML = "Card Number: <strong> Too many </strong></em>";
-    }else{
-      ccLabel.innerHTML = "Card Number:";
-      ccLabel.style.color= "black";
-    }
-
-})
-
+  let ccLabel = document.querySelector("label[for='cc-num']");
+  if (creditCardNumber.value.length < 13) {
+    ccLabel.style.color = "darkred";
+    ccLabel.innerHTML = "Card Number: <strong>Not enough digits</strong>";
+  } else if (creditCardNumber.value.length > 16) {
+    ccLabel.style.color = "darkred";
+    ccLabel.innerHTML = "Card Number: <strong> Too many digits </strong></em>";
+  } else {
+    ccLabel.innerHTML = "Card Number:";
+    ccLabel.style.color = "black";
+  }
+});
+creditCardCvv.addEventListener("input", cvvCheck);
+zipCode.addEventListener("input", zipCodeCheck);
 //function to manipulate select menu option properties.
 function optionManipulation(selectedOption, property, propValue) {
   let option = document.querySelector(`option[value="${selectedOption}"]`);
@@ -267,18 +260,41 @@ userName.addEventListener("keyup", () => {
 userEmail.addEventListener("keyup", () => {
   emailInputTest();
 });
+// on clicking the register button. The function calls check each input for valid info
+// if the information found is valid the flag for the specific input it changed
+// once all flags match the criteria the submit button will work.
 
 registerButton.addEventListener("click", (e) => {
-  e.preventDefault();
-  console.log(emailFlag,nameFlag,checkboxFlag);
-  emailInputTest();
-  nameInputTest();
-  checkboxChecked();
-  creditCardCheck();
-  if(nameFlag==false || emailFlag==false || checkboxFlag==false){
-    return false; 
-  }else{
-    document.querySelectorAll("form")[0].submit();
+// this conditional statement just changes the criteria for valid submission depending on payment method.  
+  if (document.querySelector('option[value ="credit card"').selected) {
+    e.preventDefault();
+    emailInputTest();
+    nameInputTest();
+    checkboxChecked();
+    creditCardCheck();
+    cvvCheck();
+    zipCodeCheck();
+    if (
+      nameFlag == false ||
+      emailFlag == false ||
+      checkboxFlag == false ||
+      creditCardFlag == false ||
+      cvvFlag == false ||
+      zipCodeFlag == false
+    ) {
+      return false;
+    } else {
+      document.querySelectorAll("form")[0].submit();
+    }
+  } else {
+    e.preventDefault();
+    emailInputTest();
+    nameInputTest();
+    checkboxChecked();
+    if (nameFlag == false || emailFlag == false || checkboxFlag == false) {
+      return false;
+    } else {
+      document.querySelectorAll("form")[0].submit();
+    }
   }
 });
-
